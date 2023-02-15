@@ -10,6 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +32,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/full_name"
+                android:id="@+id/full_name_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
@@ -52,7 +53,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/address"
+                android:id="@+id/address_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
@@ -73,7 +74,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/country"
+                android:id="@+id/country_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
@@ -94,7 +95,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/phone_number"
+                android:id="@+id/phone_number_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
@@ -192,7 +193,7 @@
 
 
                 <Button
-                    android:id="@+id/submit_details_cash"
+                    android:id="@+id/submit_details_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"

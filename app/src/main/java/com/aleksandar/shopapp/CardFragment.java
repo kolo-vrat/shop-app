@@ -1,58 +1,37 @@
 package com.aleksandar.shopapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CardFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 public class CardFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private EditText etName;
+    private EditText etAddress;
+    private EditText etCountry;
+    private EditText etPhone;
+    private EditText etCardNumber;
+    private EditText etCVV;
+    private EditText etMonth;
+    private EditText etYear;
+    private Button btnSubmit;
 
     public CardFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CardFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CardFragment newInstance(String param1, String param2) {
-        CardFragment fragment = new CardFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -60,5 +39,49 @@ public class CardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_card, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        etName = getView().findViewById(R.id.full_name_card);
+        etAddress = getView().findViewById(R.id.address_card);
+        etCountry = getView().findViewById(R.id.country_card);
+        etPhone = getView().findViewById(R.id.phone_number_card);
+        etCardNumber = getView().findViewById(R.id.card_number);
+        etCVV = getView().findViewById(R.id.card_cvv);
+        etMonth = getView().findViewById(R.id.card_month);
+        etYear = getView().findViewById(R.id.card_year);
+        btnSubmit = getView().findViewById(R.id.submit_details_card);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkInput()) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmActivity.class);
+                    intent.putExtra("name", etName.getText().toString());
+                    intent.putExtra("address", etAddress.getText().toString());
+                    intent.putExtra("country", etCountry.getText().toString());
+                    intent.putExtra("phone", etPhone.getText().toString());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(),"All fields are mandatory", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public boolean checkInput() {
+        if (etName.getText().toString().length() == 0 ||
+            etAddress.getText().toString().length() == 0 ||
+            etCountry.getText().toString().length() == 0 ||
+            etPhone.getText().toString().length() == 0 ||
+            etCardNumber.getText().toString().length() == 0 ||
+            etCVV.getText().toString().length() == 0 ||
+            etMonth.getText().toString().length() == 0 ||
+            etYear.getText().toString().length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
